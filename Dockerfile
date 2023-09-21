@@ -16,10 +16,9 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /workspace
 
-# Install git for version control
-RUN apk add git \
-    && git config --global user.name "Jose Gomez" \
-    && git config --global user.email "gomezjosem@live.com"
+# Upgrade apk and install latest version of git
+RUN apk upgrade --no-cache \
+    && apk add git 
     
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
