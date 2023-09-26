@@ -57,15 +57,26 @@ Additionally, this devcontainer is meant to work on Visual Studio Code. You shou
 Create a `config.sh` file to host your git configuration settings. This file is run as a `postCreateCommand` as specified in `.devcontainer.json`. The format of this file should looks as such:
 ```sh
 #!/bin/ash
-# Git configuration commands
+echo "" # add white space for formatting
+
 echo "Configuring Git..."
-git config --global user.name "YOUR NAME"
-git config --global user.email "YOUR EMAIL"
-# Optional commands to display OS Info
+echo "-----------------------------------------"
+# config username and print for confirmation
+git config --global user.name "YOUR NAME" 
+echo -n "User: " 
+git config --global user.name
+# config email and print for confirmation
+git config --global user.email "YOUR EMAIL" 
+echo -n "Email: " 
+git config --global user.email
+echo "" # add white space for formatting
+
 echo "Displaying OS Info..."
+echo "-----------------------------------------"
 cat /etc/os-release
+echo "" # add white space for formatting
 ```
-All dependencies will be handled during the build process with Docker.
+All dependencies within your `requirements.txt` file will be handled during the build process with Docker.
 
 <!-- GETTING STARTED -->
 ## Getting started
@@ -73,9 +84,9 @@ This project is setup to work with Docker on Visual Studio Code. Once the [remot
 
 ![Rebuild and Reopen In Container](imgs/rebuildAndReopenInContainer.png)
 
-Doing so will start the build process for the devcontainer. Visual Studio will establish a remote connection to the development container with several common python extensions installed in the IDE. Of note when a successful connection is established to the container, info for the alpine-linux OS is displayed as shown below:
+Doing so will start the build process for the devcontainer. Visual Studio will establish a remote connection to the development container with several common python extensions installed in the IDE. Of note when a successful connection is established to the container, the user name and email provided for git configuration is displayed along with information for the alpine-linux OS as shown below:
 
-![Operating System Information](imgs/osInfo.png)
+![Operating System Information](imgs/postCreate.png)
 
 The `src` folder includes a python file, ``main.py``, that can be run to validate that the `cowsay` dependency included in our `requirements.txt` file was added correctly.
 
